@@ -6,29 +6,30 @@ __namespace__() {
         core::module::install_packs 'ruby'
     }
 
-    # Установка RVM и Ruby для указанного пользователя
-    [[ ${!RUBY_OPTS[@]} =~ u|(user) ]] && {
-        local user=${RUBY_OPTS[$BASH_REMATCH]}
-    } || {
-        echo "Required option 'user' is not found"
-        exit 1
-    }
+    local workdir="/tmp/ruby_install"
 
-    grep "^$user:" /etc/passwd > /dev/null || {
-        echo "User '$user' doesn't exist on your system! Failed to install module."
-        exit 1
-    }
-
-    local curl_conf="/home/$user/.curlrc"
-
-    if [[ ! -f $curl_conf ]]; then
-        echo insecure >> $curl_conf
-    else
-        grep 'insecure' $curl_conf || {
-            echo insecure >> $curl_conf
-        }
+    if [[ -d $workdir ]]; then
+        rm -rf $workdir
     fi
-    su $user -l -c "curl -#L https://get.rvm.io | bash -s stable --ruby"
-    su $user -l -c "source /home/$user/.rvm/scripts/rvm"
+    mkdir $workdir && cd $workdir
+
+    # Ruby
+
+    wget http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz
+    tar -xzf ruby-*.tar.gz
+    rm -f ruby-*.tar.gz
+    cd ruby-*
+
+    ./configure && make && checkinstall --install=yes --pkgname=ruby --fstrans=no --type=debian \
+        --pakdir='..' --default --pkgversion=2.0.0-p353 --provides=ruby-interpreter
+
+    # RubyGems
+
+    wget http://production.cf.rubygems.org/rubygems/rubygems-2.1.7.tgz
+    tar -xzf rubygems-*.tgz
+    rm -f rubygems-*.tgz
+    cd rubygems-*
+
+    ruby setup.rb
 
 }; __namespace__

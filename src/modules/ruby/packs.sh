@@ -1,3 +1,3 @@
 #!/bin/bash
 
-PACKS=( curl bzip2 libssl-dev )
+PACKS=( curl bzip2 libssl-dev checkinstall )
