@@ -20,8 +20,18 @@ __namespace__() {
     rm -f ruby-*.tar.gz
     cd ruby-*
 
-    ./configure && make && checkinstall --install=yes --pkgname=ruby --fstrans=no --type=debian \
-        --pakdir='..' --default --pkgversion=2.0.0-p353 --provides=ruby-interpreter
+    ./configure && make && checkinstall \
+        --pkgname=ruby \
+        --pkgversion=2.0.0-p353 \
+        --install=yes \
+        --type=debian \
+        --fstrans=no \
+        --provides=ruby \
+        --nodoc \
+        --default \
+        make install
+
+    cd ..
 
     # RubyGems
 
