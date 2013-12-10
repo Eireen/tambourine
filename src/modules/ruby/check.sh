@@ -10,20 +10,11 @@ __namespace__() {
         return
     fi
 
-    [[ ${!RUBY_OPTS[@]} =~ u|(user) ]] && {
-        local user=${RUBY_OPTS[$BASH_REMATCH]}
-    } || {
-        echo "Required option 'user' is not found"
-        exit 1
-    }
-    grep "^$user:" /etc/passwd > /dev/null || {
-        echo "User '$user' doesn't exist on your system! Failed to check module."
-        exit 1
-    }
+    core::module::check_pack_status_by_dpkg 'ruby'
 
-    su $user -l -c 'ruby -v >& /dev/null' || {
+    if [[ $PACK_INSTALLED = false ]]; then
         MODULES_STATE['ruby']='NOT_INSTALLED'
         return
-    }
+    fi
     
 }; __namespace__

@@ -2,12 +2,12 @@
 
 __namespace__() {
 
-    core::module::purge_packs 'backup'
+    core::module::purge_packs 'whenever'
 
     gem -v >& /dev/null || {
         return
     }
 
-    gem uninstall backup
+    gem uninstall whenever
 
 }; __namespace__

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-SHORT_OPTS='u:'
-LONG_OPTS='user:'
+SHORT_OPTS=''
+LONG_OPTS=''
