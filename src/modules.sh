@@ -12,4 +12,5 @@ STANDARD_MODULES=(
     ssh
     sudo
     user
+    whenever
 )
