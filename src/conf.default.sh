@@ -19,5 +19,3 @@ MYSQL_OPTS['root-password']='mysql-root-password'
 
 NGINX_OPTS['auth']=yes
 NGINX_OPTS['gzip-static']=yes
-
-BACKUP_OPTS['user']=testuser
