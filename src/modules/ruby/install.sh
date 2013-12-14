@@ -21,7 +21,7 @@ __namespace__() {
     cd ruby-*
 
     ./configure && make && checkinstall \
-        --pkgname=ruby \
+        --pkgname=ruby-pack \
         --pkgversion=2.0.0-p353 \
         --install=yes \
         --type=debian \

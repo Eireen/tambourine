@@ -10,7 +10,7 @@ __namespace__() {
         return
     fi
 
-    core::module::check_pack_status_by_dpkg 'ruby'
+    core::module::check_pack_status_by_dpkg 'ruby-pack'
 
     if [[ $PACK_INSTALLED = false ]]; then
         MODULES_STATE['ruby']='NOT_INSTALLED'

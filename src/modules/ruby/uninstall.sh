@@ -2,7 +2,7 @@
 
 __namespace__() {
 
-    dpkg -r ruby
+    dpkg -r ruby-pack
 
     core::module::purge_packs 'ruby'
 
