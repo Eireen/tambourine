@@ -185,7 +185,7 @@ main::_extend_modules_by_deps() {
                 j=$((j+1))
             done
 
-            if [[ ! "${MODULES[@]:$i-1}" =~ "$dep_module" ]]; then
+            if [[ ! "${MODULES[@]:0:$i-1}" =~ "$dep_module" ]]; then
                 MODULES=( "${MODULES[@]:0:$i}" "$dep_module" "${MODULES[@]:$i}" )
 
                 i=-1
