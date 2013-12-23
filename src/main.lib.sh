@@ -176,13 +176,13 @@ main::_extend_modules_by_deps() {
             fi
             DEPS=( "${buffer[@]}" )
 
-            local j=$i
+            local j=$(($i+1))
             while [[ $j -lt ${#MODULES[@]} ]]; do
                 if [[ $dep_module == ${MODULES[$j]} ]]; then
                     MODULES=( ${MODULES[@]:0:$j} ${MODULES[@]:($j+1)} )
                 fi
 
-                j=$((j+1))
+                j=$(($j+1))
             done
 
             if [[ ! "${MODULES[@]:0:$i-1}" =~ "$dep_module" ]]; then
